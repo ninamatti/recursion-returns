@@ -19,8 +19,7 @@ class Board {
 }
 
 class RobotPaths {
-  // initialize all your options
-  // you may want to change this code later on, too
+  // initialize all options
   constructor(size) {
     this.board = new Board(size);
     this.row = 0;
@@ -32,15 +31,10 @@ class RobotPaths {
   }
 
   solve() {
-    console.log("STARTING goal " + this.goal);
-    console.log("I'm SOLVING");
     let moveRobot = (row, column) => {
-      console.log("CURRENT ROW " + row + "CURRENT COLUMN " + column);
 
       // WIN and toggle
-      console.log("GOAL " + this.goal + " row " + row + " column " + column);
       if (row === this.goal && column === this.goal) {
-        console.log("WE WON");
         this.pathCount += 1;
         for (let row = 0; row < n; row++) {
           for (let col = 0; col < n; col++) {
@@ -51,12 +45,11 @@ class RobotPaths {
         }
         return;
       }
+      
       // DOWN A ROW
       if (row + 1 < this.goal && row + 1 >= 0) {
-        console.log("GOING DOWN");
         // has been visited?
         if (!this.board.hasBeenVisited(row + 1, column)) {
-          console.log("HASN'T BEEN VISITED");
           this.board.togglePiece(row + 1, column);
           moveRobot(row + 1, column);
         }
@@ -64,7 +57,6 @@ class RobotPaths {
 
       // UP A ROW
       if (row - 1 < this.goal && row - 1 >= 0) {
-        console.log("GOING DOWN");
         // has been visited?
         if (!this.board.hasBeenVisited(row - 1, column)) {
           this.board.togglePiece(row - 1, column);
@@ -94,7 +86,6 @@ class RobotPaths {
     };
 
     moveRobot(0, 0);
-    console.log("RESULT " + this.pathCount);
     return this.pathCount;
   }
 }
